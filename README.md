@@ -15,11 +15,21 @@ Crear sistema de web scraping, y crear dataset de al menos 5 categorías , con d
 - Instalar Git https://git-scm.com/
 - Instalar visual estudio code https://code.visualstudio.com/
 
-## Pasos sugeridos para niciar proyectos
+## Pasos sugeridos para iniciar proyecto clonado
 
 - Crear carpeta    mkdir tallernlp
 - Ir a carpeta
 - Clonar Repositorio git clone https://github.com/centrograduadosFIUBA/tallernlp
+- Abrir visual estudio code  con code .
+- Crear entorno Python -m venv env
+- Agregar entorno a gitignore
+- Instalar dependencias con pip install -r requirements.txt
+
+## Pasos sugeridos para iniciar proyecto desde cero
+
+- Crear carpeta    mkdir tallernlp
+- Ir a carpeta
+- Agregar los archivos del Repositorio git ( https://github.com/centrograduadosFIUBA/tallernlp)
 - Abrir visual estudio code  con code .
 - Inicializar proyecto con git init
 - Crear gitignore
