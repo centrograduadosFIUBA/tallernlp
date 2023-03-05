@@ -1,38 +1,30 @@
 from bs4 import BeautifulSoup
-import requests  
-url = "https://en.wikipedia.org/wiki/Alexander_the_Great"
-req = requests.get(url)   
-statusCode = req.status_code
-# print("statusCode: ", statusCode)
-if statusCode == 200:
-    html = BeautifulSoup(req.text,"html.parser")
+import requests
+import pandas as pd
+import os
 
-# print(html.prettify())
+# Lee el archivo de Excel con pandas
+df = pd.read_excel("DataSetTemas.xlsx")
 
-# print(html.title)
+for index, row in df.iterrows():
 
-"""div = html.find(id='firstHeading')
-print(div.text)"""
+    # Obtiene los datos de cada fila
+    url = row["URL"]
+    nombre_archivo = row["Nombre_archivo"]
+    clase = row["Clase"]
+    codigo = row["Código"]
+       
+    # Crear la carpeta si no existe
+    if not os.path.exists("textos/" + clase):
+        os.makedirs("textos/" + clase)
+    
+    # Obtener el contenido HTML de la página
+    req = requests.get(url)
+    if req.status_code == 200:
+        html = BeautifulSoup(req.text, "html.parser")
+        # Si deseas guardar cada párrafo en un archivo, puedes hacerlo de la siguiente manera:
+        with open(f"textos/{clase}/{nombre_archivo}.txt", "w", encoding="utf-8") as f:
+                for para in html.find_all("p"):
+                    f.write(para.text)
 
-# print(html.title.string)
-
-# ejemplo de captura de subtitulos
-# print([item.get_text() for item in html.select("h2 .mw-headline")])
-
-paragraphs = html.findAll("p")
-
-
-cont = 0
-for para in paragraphs:
-    cont +=1
-    print ()
-    print ("Párrafo: ",cont)
-    print ()
-    print (para.text)
-    # parrafo = open(  clase + "/" + archivo + str(cont),"w",encoding = "utf-8") 
-    # parrafo.write(para.text)
-    # parrafo.close()
-
-
-
-
+print("finalizo")
